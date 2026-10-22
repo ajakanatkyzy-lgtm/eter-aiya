@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="kk"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Этерификация: виртуалды зертхана</title>
+<style>
+:root{--bg:#eef3f2;--sf:#fff;--ink:#12302e;--mut:#4d6663;--ac:#0d7a6f;--fl:#d9822b;--bd:#c5d6d3;--ok:#e3f3ee;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1c1b;--sf:#172a28;--ink:#e3f1ee;--mut:#9bb5b1;--ac:#4fd1c0;--fl:#f0a050;--bd:#2c4744;--ok:#1b3a36}}
+:root[data-theme="dark"]{--bg:#0f1c1b;--sf:#172a28;--ink:#e3f1ee;--mut:#9bb5b1;--ac:#4fd1c0;--fl:#f0a050;--bd:#2c4744;--ok:#1b3a36}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,"Noto Serif",serif;max-width:960px;margin-inline:auto;padding:16px}
+h1{font:700 1.5rem/1.25 "Trebuchet MS",system-ui,sans-serif;margin:8px 0}
+h2{font:700 1.15rem "Trebuchet MS",system-ui,sans-serif;margin:0 0 8px;color:var(--ac)}
+.sub{color:var(--mut);margin:0 0 14px}
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tabs button,.nav button{font:600 .95rem system-ui,sans-serif;border:2px solid var(--ac);background:transparent;color:var(--ac);padding:10px 14px;border-radius:8px;cursor:pointer}
+.tabs button{flex:1}
+.tabs button[aria-selected=true],.nav button.p{background:var(--ac);color:var(--bg)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--fl);outline-offset:2px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px;margin-bottom:12px}
+.rx{font:1.05rem/1.9 "Cambria Math",Georgia,serif;overflow-x:auto;white-space:nowrap}
+.rx small{color:var(--mut);font-size:.85rem}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+.sc{overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:6px 8px;text-align:left}th{background:var(--ok)}
+.lab{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:720px){.lab{grid-template-columns:300px 1fr}}
+svg{width:100%;max-width:320px;height:auto;display:block;margin:auto;background:var(--ok);border-radius:10px}
+.st{font:600 .85rem system-ui,sans-serif;color:var(--mut)}
+.bar{height:6px;background:var(--bd);border-radius:3px;margin:6px 0 10px}.bar i{display:block;height:100%;background:var(--fl);border-radius:3px;transition:width .3s}
+.nav{display:flex;gap:8px;margin-top:10px}
+.eq{background:var(--ok);border-left:4px solid var(--ac);padding:8px 10px;border-radius:4px;margin:8px 0}
+.warn{border-left:4px solid var(--fl);padding:6px 10px;background:var(--ok);margin:6px 0}
+input{font:inherit;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--sf);color:var(--ink);width:120px}
+ul,ol{padding-left:20px;margin:6px 0}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style></head><body>
+<h1>№8 тақырып. Этерификация реакциялары</h1>
+<p class="sub">Виртуалды зертхана: екі жұмыс. Қадамдарды «Келесі» батырмасымен өтіңіз, құрал-жабдық сызбасы әр қадамға сай өзгереді.</p>
+<div class="tabs" role="tablist"><button role="tab" id="t0" aria-selected="true">1. Этилацетат</button><button role="tab" id="t1" aria-selected="false">2. Изоамилацетат</button></div>
+<div id="app"></div>
+<script>
+const L=[{
+name:"Сірке қышқылын этил спиртімен этерификациялап, этилацетатты алу",
+aim:["Сірке қышқылының этил спиртімен этерификациялануынан этилацетатты алу тәсілін игеру.","Этерификация реакциясының механизмімен танысу."],
+theory:"Қышқыл катализатордың қатысуымен жүретін этерификация реакциясы (карбон қышқылының спиртпен әрекеттесуі) күрделі эфирлер алудың негізгі тәсілі. Реакция қайтымды, тепе-теңдікке жеткенде қоспада бастапқы заттар да, өнімдер де болады. Тепе-теңдікті эфир түзілу жағына ығыстыру үшін Ле-Шателье принципі бойынша бастапқы компоненттердің бірін артық алады немесе өнімнің бірін (эфирді) қоспадан алып тастайды. Этилацетат: түссіз сұйық, жеміс иісі бар, қайнау t = 77,2 °C, тығыздығы 0,9 г/см³. Спиртпен, хлороформмен, бензолмен араласады; еріткіш ретінде қолданылады.",
+rx:[["Негізгі реакция","CH₃COOH + C₂H₅OH ⇌ CH₃COOC₂H₅ + H₂O <small>(H₂SO₄, қыздыру)</small>"],["Қосымша реакция а) (t &lt; 140 °C)","2C₂H₅OH → CH₃CH₂–O–CH₂CH₃ + H₂O <small>(H₂SO₄)</small>"],["Қосымша реакция ә) (t жоғары)","C₂H₅OH + 6H₂SO₄ → 2CO₂ + 6SO₂ + 9H₂O <small>(t)</small>"]],
+reag:"Этил спирті 0,37 моль (22,5 мл); сірке қышқылы 0,35 моль (20,0 мл); күкірт қышқылы (ρ = 1,84 г/см³) 2,5 мл; хлорлы кальций; қаныққан Na₂CO₃ ерітіндісі; сусыз Na₂SO₄.",
+tools:"Вюрц колбасы 100 мл; тамшылы воронка; Либих тоңазытқышы; термометр; аллонж; қабылдағыш колба 50 мл; дефлегматор; бөлетін воронка; глицерин моншасы.",
+steps:[
+{t:"Қондырғыны жинау",d:"Вюрц колбасын тамшылы воронкамен, термометрмен және Либих тоңазытқышымен жалғаңыз. Термометр моншаның ішінде (колба қоспасында) болуы керек. Барлық түйіс герметикалық болсын.",m:"dist",f:0,c:"#9fd6e8",h:0,b:0,T:"20 °C"},
+{t:"Колбаға реагенттерді құю",d:"Вюрц колбасына 2,5 мл этил спиртін құйыңыз, суыта отырып 2,5 мл концентрлі H₂SO₄ қосыңыз. Күкірт қышқылы катализатор әрі су тартқыш.",m:"dist",f:.2,c:"#d7e6a8",h:0,b:0,T:"20 °C"},
+{t:"Тамшылы воронканы толтыру",d:"Воронкаға қалған спирт (≈20 мл) пен сірке қышқылының (20,0 мл) қоспасын құйыңыз.",m:"dist",f:.2,c:"#d7e6a8",h:0,b:0,T:"20 °C",fun:1},
+{t:"Глицерин моншасында қыздыру",d:"Қоспаны глицерин моншасында 140 °C-қа дейін қыздырыңыз. Температураны үнемі бақылаңыз: 140 °C-дан аспауы керек, әйтпесе қосымша реакциялар (диэтил эфирі, SO₂ және CO₂) жүреді.",m:"dist",f:.2,c:"#d7e6a8",h:1,b:1,T:"140 °C",fun:1,w:1},
+{t:"Реагенттерді тамшылатып қосу",d:"140 °C жеткен соң воронкадан спирт пен қышқыл қоспасын эфирдің айдалу жылдамдығына тең жылдамдықпен тамшылатыңыз. Эфир, су және артық реагент қабылдағышқа айдалады.",m:"dist",f:.3,c:"#e8d58a",h:1,b:1,T:"140 °C",fun:1,r:.5},
+{t:"Реакцияны аяқтау",d:"Воронкадағы қоспа біткен соң қыздыруды тоқтатыңыз. Қабылдағышта: этилацетат, су, қышқыл және спирт қалдықтары.",m:"dist",f:.15,c:"#c9a85a",h:0,b:0,T:"140 → 60 °C",r:.8},
+{t:"Қышқыл қалдығын бейтараптау",d:"Дистиллятқа көк лакмус қағазының қызаруы тоқталғанға дейін қаныққан Na₂CO₃ ерітіндісін аздап қосыңыз. Абайлаңыз: бөлінген CO₂ көбіктеніп, қоспаны тасытуы мүмкін.",m:"sep",f:.7,c:"#cfe9f2",h:0,b:1,T:"20 °C",sp:0},
+{t:"Бөлетін воронкада бөлу",d:"Қоспаны бөлетін воронкаға құйып, шайқап, тұндырыңыз. Астыңғы (сулы) қабатты төгіп тастаңыз. Жоғарғы қабат: этилацетат.",m:"sep",f:.7,c:"#cfe9f2",h:0,b:0,T:"20 °C",sp:1},
+{t:"Спирт қалдығын CaCl₂-мен жою",d:"Эфир қабатына қаныққан CaCl₂ ерітіндісін (8 г CaCl₂ + 8 мл H₂O) қосыңыз. Хлорлы кальций спирт қалдығымен сольват CaCl₂·2C₂H₅OH түзіп, оны жояды. Қайта бөліп, астыңғы қабатты төгіңіз.",m:"sep",f:.7,c:"#cfe9f2",h:0,b:0,T:"20 °C",sp:1},
+{t:"Сусыз Na₂SO₄-пен кептіру",d:"Эфирді таза құрғақ колбаға құйып, сусыз Na₂SO₄ қосыңыз да, судан толық құрғатыңыз.",m:"none",f:.4,c:"#e9f0c0",h:0,b:0,T:"20 °C"},
+{t:"Дефлегматормен қайта айдау",d:"Эфирді дефлегматор арқылы айдап, 75–78 °C қайнайтын фракцияны сулы тоңазытқышы бар қабылдағышқа жинаңыз. Бұл таза этилацетат.",m:"dist",f:.3,c:"#e9f0c0",h:1,b:1,T:"77 °C",r:.7},
+{t:"Нәтижені өлшеу",d:"Алынған этилацетаттың массасын (немесе көлемін) өлшеңіз. Төмендегі есептегіште шығымын есептеңіз.",m:"none",f:.5,c:"#e9f0c0",h:0,b:0,T:"20 °C"}],
+safety:["Күкірт қышқылымен жұмыс істегенде көзілдірік пен қолғап киіңіз; ол күйдіреді.","Этилацетат тез жанады: ашық оттан аулақ жұмыс істеңіз.","Na₂CO₃ қосқанда CO₂ бөлінеді: қақпақсыз, бөлек-бөлек аздап қосыңыз.","Моншаның температурасы 140 °C-тан аспауы керек."],
+res:["Қай зат (сірке қышқылы немесе спирт) артық алынғанын анықтаңыз: n(CH₃COOH) = 0,35 моль, n(C₂H₅OH) = 0,37 моль. Сірке қышқылы жетіспейді, ол шектеуші реагент, ал спирт артық.","Теориялық шығым бойынша 1 моль қышқылдан 1 моль эфир түзіледі: n(теор.) = 0,35 моль. M(CH₃COOC₂H₅) = 88,11 г/моль.","m(теор.) = 0,35 · 88,11 ≈ 30,8 г; V(теор.) = 30,8 / 0,9 ≈ 34,3 мл.","Практикалық шығымды теориялықпен салыстырыңыз: η = m(практ.) / m(теор.) · 100 %."],
+M:88.11,mt:30.8,pr:[["Сірке қышқылы","CH₃COOH","60,05","118","1,05"],["Этил спирті","C₂H₅OH","46,07","78,4","0,79"],["Этилацетат","CH₃COOC₂H₅","88,11","77,2","0,9"],["Су","H₂O","18,02","100","1,0"]]
+},{
+name:"Сірке қышқылының изоамил эфирінің синтезі",
+aim:["Этерификация реакциясымен изоамилацетатты тепе-теңдікті ығыстыру үшін судың азеотропты айдалуын қолданып синтездеу."],
+theory:"Изоамилацетат: жеміс иісі бар түссіз сұйықтық; 100 мл суда 0,25 г ериді; спиртпен, эфирмен, хлороформмен араласады. M = 130,18 г/моль, қайнау t = 142 °C, балқу t = −78,5 °C, тығыздығы 0,8719 г/см³. Целлюлозаның еріткіші, тамақ өнеркәсібінде «алмұрт эссенциясы» деп аталады. Реакцияда түзілген су эфирмен азеотроп беріп, қақпанда жиналады да, тепе-теңдік эфир жағына ығысады.",
+rx:[["Негізгі реакция","CH₃COOH + (CH₃)₂CHCH₂CH₂OH ⇌ CH₃COOCH₂CH₂CH(CH₃)₂ + H₂O <small>(H₂SO₄)</small>"]],
+reag:"Изоамил спирті 22,5 г (26 мл; 0,24 моль); сірке қышқылы (мұздай) 18 г (17 мл; 0,3 моль) немесе 80 %-ті 20 мл; H₂SO₄ (ρ = 1,84 г/см³) 0,5 мл; 5 %-ті NaHCO₃/Na₂CO₃ ерітіндісі; сусыз Na₂SO₄ (MgSO₄).",
+tools:"Дөңгелек түпті колба 100 мл; суды бөлетін қақпан (Дин–Старк); бөлетін воронка; қайтымды тоңазытқыш; Вюрц колбасы; Либих тоңазытқышы.",
+steps:[
+{t:"Қондырғыны жинау",d:"Қақпан мен қайтымды тоңазытқышы бар 100 мл дөңгелек түпті колбаны жинаңыз. Эфир буы организмге әсер етеді, сондықтан барлық жалғау герметикалық болуы керек.",m:"reflux",f:0,c:"#9fd6e8",h:0,b:0,T:"20 °C",tr:0},
+{t:"Изоамил спиртін құю",d:"Колбаға 26 мл изоамил спиртін құйыңыз.",m:"reflux",f:.25,c:"#e7ddb0",h:0,b:0,T:"20 °C",tr:0},
+{t:"Сірке қышқылы мен катализатор",d:"17 мл мұзды сірке қышқылын және 0,5 мл концентрлі H₂SO₄ қосыңыз. Бірнеше «қайнауыштарды» салыңыз.",m:"reflux",f:.55,c:"#e7ddb0",h:0,b:0,T:"20 °C",tr:0},
+{t:"Қыздыру",d:"Колбаны глицерин моншасында қыздырыңыз. Қоспа қайнап, бу тоңазытқышта сұйылады.",m:"reflux",f:.55,c:"#e7ddb0",h:1,b:1,T:"≈ 120 °C",tr:.1},
+{t:"Су қабатын бақылау",d:"Қақпанда екі қабат жиналады: астыңғысы су, үстіңгісі эфир мен реагент қалдығы. Үстіңгі қабат қайтадан колбаға ағады. Қақпандағы су қабаты ұлғаймай қалғанға дейін қыздырыңыз.",m:"reflux",f:.5,c:"#e7ddb0",h:1,b:1,T:"≈ 130 °C",tr:.7},
+{t:"Реакцияны аяқтау және суыту",d:"Реакция аяқталған соң қыздыруды тоқтатыңыз. Қақпандағы эфирді колбаға құйып, бөлме температурасына дейін кран суының астында суытыңыз.",m:"reflux",f:.45,c:"#e0cf95",h:0,b:0,T:"→ 20 °C",tr:.9},
+{t:"Сумен жуу",d:"Колба ішіндегіні бөлетін воронкаға апарып, екі рет сумен жуыңыз.",m:"sep",f:.7,c:"#e0cf95",h:0,b:0,T:"20 °C",sp:1},
+{t:"Сода ерітіндісімен жуу",d:"5 %-ті сода ерітіндісімен жуып, қышқыл қалдығын бейтараптаңыз. Содан кейін тағы сумен (бейтарап реакцияға дейін) жуыңыз. Бөлетін воронканы шайқаудан шаю небары тиімді. Егер су қабаты эфир қабатынан нашар бөлінсе, 5 г ас тұзын қосып араластырыңыз: тұздау эфирдің суда ерігіштігін төмендетеді.",m:"sep",f:.7,c:"#e0cf95",h:0,b:0,T:"20 °C",sp:1},
+{t:"Кептіру",d:"Эфирді сусыз Na₂SO₄ (немесе MgSO₄) арқылы кептіріңіз.",m:"none",f:.4,c:"#efe6b8",h:0,b:0,T:"20 °C"},
+{t:"Айдау",d:"Эфирді Вюрц колбасынан айдаңыз. Негізгі фракция 138–140 °C температурада айдалады. Изоамилацетаттың массасын анықтаңыз.",m:"dist",f:.4,c:"#efe6b8",h:1,b:1,T:"139 °C",r:.7},
+{t:"Нәтижені өлшеу",d:"Өнімнің массасын өлшеп, шығымды есептеңіз. Қайта есептеусіз тәжірибені қайталау үшін 80 %-тік сірке қышқылын да қолдануға болады.",m:"none",f:.5,c:"#efe6b8",h:0,b:0,T:"20 °C"}],
+safety:["Изоамилацетатпен абайлап жұмыс істеңіз: ол жеңіл жанады (тұтану t = 36 °C).","Амил эфирі организмге нашар әсер етеді, көз бен мұрынның, тыныс жолдарының кілегей қабықтарын тітіркендіреді. Колба қақпанмен және қайтымды тоңазытқышпен герметикалық жалғанған болуы керек; шаю мен кептіру шыны шлифтығынмен жабылған бөлетін воронкада жүргізіледі.","Эфирді айдауға арналған құрал да герметикалық болуы керек."],
+res:["Шектеуші реагентті анықтау: n(спирт) = 0,24 моль, n(қышқыл) = 0,3 моль. Спирт жетіспейді, қышқыл артық.","n(теор.) = 0,24 моль; M(изоамилацетат) = 130,18 г/моль.","m(теор.) = 0,24 · 130,18 ≈ 31,2 г; V(теор.) = 31,2 / 0,8719 ≈ 35,8 мл.","η = m(практ.) / m(теор.) · 100 %."],
+M:130.18,mt:31.2,pr:[["Сірке қышқылы","CH₃COOH","60,05","118","1,05"],["Изоамил спирті","C₅H₁₁OH","88,15","131","0,81"],["Изоамилацетат","C₇H₁₄O₂","130,18","142","0,8719"],["Су","H₂O","18,02","100","1,0"]]
+}];
+let cur=0,si=[0,0];
+const $=s=>document.querySelector(s);
+function svg(s){
+ const f=s.f,y=220-f*120,col=s.c;let o=`<svg viewBox="0 0 300 260" role="img" aria-label="Құрал сызбасы"><defs><clipPath id="cl"><circle cx="130" cy="170" r="55"/></clipPath></defs>`;
+ const st='stroke="currentColor" stroke-width="2.5" fill="none"';
+ if(s.m==="sep"){
+  o+=`<path d="M105 25h90M120 25v15M180 25v15M120 40l-10 15 30 110h20l30-110-10-15zM150 175v25" ${st} style="color:var(--ink)"/>`;
+  o+=`<path d="M118 70l25 90h14l25-90z" fill="${s.sp?'#e9f0c0':col}" opacity=".9"/>`;
+  if(s.sp)o+=`<path d="M128 108l17 52h10l17-52z" fill="#a9d4e6"/><text x="200" y="85" fill="currentColor" font-size="12">эфир</text><text x="200" y="135" fill="currentColor" font-size="12">су</text>`;
+  o+=`<rect x="140" y="200" width="20" height="10" fill="var(--ink)"/>`;
+ }else if(s.m==="none"){
+  o+=`<path d="M90 90v110q0 25 25 25h70q25 0 25-25V90" ${st} style="color:var(--ink)"/><path d="M92 ${y+30}v${200-y-30+0}q0 23 23 23h70q23 0 23-23v-${200-y-30}z" fill="${col}"/>`;
+ }else{
+  o+=`<g style="color:var(--ink)"><circle cx="130" cy="170" r="55" ${st}/><path d="M118 118V50h24v68" ${st}/></g>`;
+  o+=`<rect x="70" y="${y}" width="120" height="${230-y}" fill="${col}" clip-path="url(#cl)" opacity=".95"/>`;
+  if(s.b)for(let i=0;i<5;i++)o+=`<circle cx="${105+i*13}" cy="${205-i*9}" r="3" fill="#fff" opacity=".8"><animate attributeName="cy" values="${215-i*6};${y+8}" dur="${1+i*.2}s" repeatCount="indefinite"/></circle>`;
+  if(s.m==="reflux"){
+   o+=`<g style="color:var(--ink)"><rect x="112" y="8" width="36" height="46" rx="4" ${st}/></g><rect x="116" y="22" width="28" height="30" fill="#9fd6e8" opacity=".6"/>`;
+   o+=`<text x="155" y="28" fill="currentColor" font-size="11">тоңазытқыш</text>`;
+   o+=`<g style="color:var(--ink)"><path d="M185 95h45v40h-45z" ${st}/></g><text x="190" y="90" fill="currentColor" font-size="11">қақпан</text><path d="M188 ${135-s.tr*38}h39v${s.tr*38}h-39z" fill="#9fd6e8"/><path d="M188 ${135-s.tr*38}h39v${Math.min(s.tr*14,10)}h-39z" fill="#e7ddb0"/>`;
+  }else{
+   o+=`<g style="color:var(--ink)"><path d="M142 60l90 40" ${st}/><path d="M232 100l15 40" ${st}/></g><text x="190" y="70" fill="currentColor" font-size="11" transform="rotate(24 190 70)">Либих</text>`;
+   o+=`<g style="color:var(--ink)"><path d="M225 150v50h45v-50" ${st}/></g><rect x="227" y="${200-(s.r||0)*45}" width="41" height="${(s.r||0)*45}" fill="#e9f0c0"/>`;
+   if(s.fun)o+=`<g style="color:var(--ink)"><path d="M85 8h40l-14 24v18h-12V32z" ${st}/></g><circle cx="105" cy="52" r="2" fill="#e8d58a"><animate attributeName="cy" values="40;60" dur="1s" repeatCount="indefinite"/></circle>`;
+  }
+  o+=`<rect x="55" y="228" width="150" height="14" rx="3" fill="var(--bd)"/>`;
+  if(s.h)o+=`<path d="M130 224c-12-6-8-18 0-22 2 9 12 10 8 22z" fill="var(--fl)"><animate attributeName="opacity" values="1;.6;1" dur=".5s" repeatCount="indefinite"/></path>`;
+ }
+ o+=`<text x="12" y="250" fill="currentColor" font-size="13" font-weight="700">t = ${s.T}</text></svg>`;return o;}
+function render(){
+ const e=L[cur],i=si[cur],s=e.steps[i],n=e.steps.length;
+ const rx=e.rx.map(r=>`<p style="margin:0"><b>${r[0]}:</b></p><div class="rx">${r[1]}</div>`).join("");
+ const tb=`<div class="sc"><table><tr><th>Заттың аталуы</th><th>Химиялық формула</th><th>Мол. массасы</th><th>Қайнау t, °C</th><th>Тығыздығы, г/см³</th></tr>${e.pr.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</table></div>`;
+ $("#app").innerHTML=`
+ <div class="card"><h2>${e.name}</h2></div>
+ <div class="card"><h2>Мақсаты</h2><ul>${e.aim.map(a=>`<li>${a}</li>`).join("")}</ul></div>
+ <div class="card"><h2>Теориялық бөлім және реакциялар</h2><p>${e.theory}</p>${rx}</div>
+ <div class="card"><h2>Реактивтер мен құралдар</h2><p><b>Реактивтер:</b> ${e.reag}</p><p><b>Құралдар:</b> ${e.tools}</p>${tb}</div>
+ <div class="card"><h2>Орындалуы (қадам-қадаммен)</h2>
+ <div class="lab"><div>${svg(s)}</div><div>
+ <div class="st">Қадам ${i+1} / ${n}</div><div class="bar"><i style="width:${(i+1)/n*100}%"></i></div>
+ <h3 style="margin:4px 0;font-family:system-ui,sans-serif">${s.t}</h3><p>${s.d}</p>${s.w?'<div class="warn">Назар аударыңыз: температура 140 °C-тан аспасын.</div>':""}
+ <div class="nav"><button id="pv" ${i?"":"disabled"}>Артқа</button><button class="p" id="nx" ${i<n-1?"":"disabled"}>Келесі</button><button id="rs">Басына қайту</button></div></div></div>
+ <details style="margin-top:12px"><summary><b>Барлық қадамдар тізімі</b></summary><ol>${e.steps.map((x,k)=>`<li${k==i?' style="color:var(--ac);font-weight:700"':""}>${x.t}</li>`).join("")}</ol></details></div>
+ <div class="card"><h2>Қауіпсіздік техникасы</h2><ul>${e.safety.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+ <div class="card"><h2>Нәтижесі</h2><ol>${e.res.map(x=>`<li>${x}</li>`).join("")}</ol>
+ <div class="eq">Тәжірибеде алынған өнім массасын енгізіңіз:<br><input id="mp" type="number" step="0.1" min="0" inputmode="decimal" placeholder="г"> <button class="p" id="cl" style="font:600 .95rem system-ui;border:0;background:var(--ac);color:var(--bg);padding:9px 14px;border-radius:8px;cursor:pointer">Есептеу</button><div id="out" aria-live="polite" style="margin-top:8px"></div></div>
+ <p><b>Қорытынды:</b> күкірт қышқылы катализаторымен жүретін этерификация қайтымды процесс. Шығымды арттыру үшін реагенттің бірін артық алады және өнімді (эфир немесе су) қоспадан үздіксіз шығарады (Ле-Шателье принципі). Алынған эфирдің шығымы теориялықтан аз болуы жуу, бөлу және айдау кезіндегі шығындармен, қосымша реакциялармен түсіндіріледі.</p></div>`;
+ $("#nx").onclick=()=>{si[cur]++;render()};$("#pv").onclick=()=>{si[cur]--;render()};$("#rs").onclick=()=>{si[cur]=0;render()};
+ $("#cl").onclick=()=>{const v=parseFloat($("#mp").value);$("#out").innerHTML=isNaN(v)||v<0?"Массаны санмен енгізіңіз.":`Теориялық шығым: ${e.mt} г. Практикалық: ${v} г. <b>η = ${(v/e.mt*100).toFixed(1)} %</b>`};
+ document.getElementById("t0").setAttribute("aria-selected",cur==0);document.getElementById("t1").setAttribute("aria-selected",cur==1);
+}
+["t0","t1"].forEach((id,k)=>document.getElementById(id).onclick=()=>{cur=k;render()});
+render();
+</script></body></html>
